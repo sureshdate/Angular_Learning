@@ -1,0 +1,52 @@
+<h1 align="center">Template driven form with validation</h1>
+<p align="center" style="background-color: tomato;">{{msg}}</p>
+
+<form #contactForm="ngForm" ngSubmit="submit(contactForm.value)" class="form-control w-50 mx-auto">
+    <div class="form-group container">
+        <label for="firstName">First Name</label>
+        <input required minlength="3" maxlength="10" ngModel name="firstName" type="text" #firstName="ngModel"
+            class="form-control" id="firstName" />
+        <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+            <div *ngIf="firstName.errors && firstName.errors['required']">First name is required</div>
+
+            <div *ngIf="firstName.errors &&firstName.errors['minlength']">FirstName is minuimum {{
+                firstName.errors && firstName.errors['minlength'].requiredLength}} Character</div>
+
+            <div *ngIf="firstName.errors &&firstName.errors['maxlength']">FirstName is maximum {{
+                firstName.errors && firstName.errors['maxlength'].requiredLength}} Character</div>
+
+
+        </div>
+    </div>
+
+
+    <div class="form-group container">
+        <label for="lastName">Last Name</label>
+        <input required minlength="3" maxlength="10" ngModel name="lastName" type="text" #lastName="ngModel"
+            class="form-control" id="lastName" />
+        <div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">
+            <div *ngIf="lastName.errors && lastName.errors['required']">Last name is required</div>
+
+            <div *ngIf="lastName.errors &&lastName.errors['minlength']">lastName is minuimum {{
+                lastName.errors && lastName.errors['minlength'].requiredLength}} Character</div>
+
+            <div *ngIf="lastName.errors &&lastName.errors['maxlength']">lastName is maximum {{
+                lastName.errors && lastName.errors['maxlength'].requiredLength}} Character</div>
+
+
+        </div>
+    </div>
+
+    <div class="form-group container">
+        <label id="comment">Comment</label>
+        <input required ngModel #comment="ngModel" name="comment" id="comment" class="form-control">
+        <div class="alert alert-danger" *ngIf="comment.touched && !comment.valid">
+            comment is required
+        </div>
+    </div>
+
+    <button class=" btn btn-primary mx-auto m-4 text-center" type="submit" [class.disable]="!contactForm.valid">
+        Submit
+    </button>
+
+</form>
